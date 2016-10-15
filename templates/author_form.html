@@ -1,0 +1,55 @@
+{% extends "base.html"%}
+{% block head %}
+<link rel="stylesheet" href="/static/css/faary.css" type="text/css" />
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+ {{ super() }}
+{% endblock %}
+{% block content %}
+
+<script type="text/javascript">
+<!--
+	function sendForm(){
+            {% if error %}
+                alert("该ID已经存在");
+        {% endif %}
+		jQuery("#imessageOK, #imessageERROR").hide();
+		jQuery(".required").removeClass("required");
+        var input_value = $("#ID").val();
+        if(input_value == null){
+            alert("失败");
+        }
+        var inputs = $(".iradio");
+        var radio_value;
+        for(var i=0;i<inputs.length;i++) {
+            if (inputs[i].checked) {
+                radio_value = inputs[i].value;
+            }
+        }
+        if(!input_value){
+            alert("id不得为空");
+        }else {
+        $.ajax({
+           type: "POST",
+            url: "{{ url_for('post') }}",
+            data: {value1:radio_value,value2:input_value},
+            success: function (){
+                    alert("成功");
+            }
+        });
+    }
+    }
+-->
+</script>
+<form method="post" action="{{ url_for('post') }}" onsubmit="return:false" class="iform">
+<div id="imessageOK">Thank you! Message Sent!</div>
+<div id="imessageERROR">ERROR: Message Not Sent!</div>
+<ul>
+<li class="iheader">添加阅读号</li>
+<li><label for="Type">Type</label><ul><li><input class="iradio" type="radio" checked="checked" name="Type" id="Type2" value="wechat"><label for="Type2" class="ilabel">微信公众号</label></li>
+<li><input class="iradio" type="radio" name="Type" id="Type3" value="jianshu"><label for="Type3" class="ilabel">简书</label></li>
+<li><input class="iradio" type="radio" name="Type" id="Type4" value="wangyi"><label for="Type4" class="ilabel">网易新闻</label></li>
+</ul></li>
+<li><label for="ID">ID</label><input class="itext" type="text" name="ID" id="ID" /></li>
+<li><label>&nbsp;</label><input type="button" class="ibutton" onclick="sendForm()" name="SendaMessage" id="SendaMessage" value="添加" /></li>
+</ul></form>
+{% endblock %}

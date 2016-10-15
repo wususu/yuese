@@ -1,0 +1,36 @@
+{% block head %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+    <style type="text/css">
+        h1{
+            color:#FF66CC;
+
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>阅 舍</title>
+</head>
+
+<body>
+<h1 align="center">阅 舍</h1>
+<ul class="nav">
+<li><a href="{{ url_for('page') }}">最新文章</a></li>
+<li><a href="{{ url_for('post') }}">添加公众号</a></li>
+<li><a href="{{ url_for('myread') }}">我的收藏</a></li>
+<li><a href="{{ url_for('blog') }}">我的博客</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+{% block footer %}
+   <div class="footer1">
+		<li><a>杨时权</a></li>
+		<li><a>吴叔叔</a></li>
+		<li><a>陈梓峰</a></li>
+	</div>
+</body>
+</html>
+{% endblock %}

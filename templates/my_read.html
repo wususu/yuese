@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+{% for auth in authors %}
+    <ul class="add_total">
+    <li class="add1_left">
+    {% if auth.status == 0 %}
+    未验证
+    {% elif auth.status == 2 %}
+    验证失败,无法关联此阅读号
+    {% elif auth.status == 1 %}
+        {% if auth.type == 1 %}
+             微信公众号
+            {% elif auth.type == 2 %}
+            简书帐号
+        {% endif %}
+
+    {% endif %}
+    </li>
+    {% if auth.status ==1 %}
+    <li class="add1_right_top"><a href="">{{ auth.author_name }}</a></li>
+        <li class="add1_right_top"><a href="">{{auth.author_id }}</a></li>
+    {% else %}
+    <li class="add1_right_top">未知</li>
+        <li class="add1_right_top">{{auth.author_id }}</li>
+    {% endif %}
+
+
+    </ul>
+
+{% endfor %}
+{% endblock %}

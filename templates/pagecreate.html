@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for article in data %}
+    <ul class="add_total">
+    <li class="add1_left"><img src="{{ article.cover_img }}" class="add_img"> </li>
+    <li class="add1_right_top"><a href="{{article.url }}">{{ article.title }}</a></li>
+
+    <li class="add1_right_buttom">{{ article.author }}  {{ article.post_time }}</li>
+    <li class="add1_right_middle">{{ article.description }} </li>
+    </ul>
+{% endfor %}
+<div class="footer">
+<ul>
+        {% if has_prev %}
+        <li><a href="{{ url_for('page', p=page-1) }}">&laquo</a> </li>
+        {% endif %}
+        {% for page_num in pager %}
+            {% if page_num == page %}
+                <li><b>{{ page_num }}</b></li>
+            {% else %}
+                <li><a href="{{ url_for('page', p=page_num) }}">{{ page_num }}</a> </li>
+            {% endif %}
+        {% endfor %}
+        {% if has_next %}
+        <li><a href="{{url_for('page',p=page+1)}}">&raquo</a> </li>
+        {% endif %}
+</ul>
+</div>
+{% endblock %}
+
+
+
+
+
+
+</body>
+</html>
